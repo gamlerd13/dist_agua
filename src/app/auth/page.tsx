@@ -6,7 +6,7 @@ export default function HomePage() {
       <div className="mx-auto flex max-w-md flex-col items-center gap-6">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">Distribuidora de Agua</h1>
-          <p className="text-muted-foreground">Por favor, inicie sesión o regístrese para continuar</p>
+          <p className="text-muted-foreground">Por favor, inicie sesión para continuar</p>
         </div>
         <div className="flex w-full flex-col gap-4">
           <Link
@@ -16,13 +16,13 @@ export default function HomePage() {
           >
             Login
           </Link>
-          <Link
+          {/* <Link
             href="/auth/register"
             className="inline-flex h-10 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             prefetch={false}
           >
             Register
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
