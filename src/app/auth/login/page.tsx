@@ -1,26 +1,32 @@
-"use client"
+"use client";
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-import { useForm } from "react-hook-form"
-import { signIn } from "next-auth/react"
-import { useRouter } from 'next/navigation'
-import { JSX, SVGProps, useState } from 'react'
-
+import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { JSX, SVGProps, useState } from "react";
 
 export default function LoginPage() {
-
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const router = useRouter()
-  const [error, setError] = useState<string | null>(null)
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
     const res = await signIn("credentials", {
@@ -30,12 +36,12 @@ export default function LoginPage() {
     });
 
     if (res && res.error) {
-      setError(res.error)
+      setError(res.error);
     } else {
-      router.push('/dashboard')
-      router.refresh()
+      router.push("/");
+      router.refresh();
     }
-
+    reset();
   });
 
   return (
@@ -49,22 +55,29 @@ export default function LoginPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Usuario</Label>
-              <Input id="username" placeholder="juanperez"
+              <Input
+                id="username"
+                placeholder="juanperez"
                 type="text"
                 {...register("username", {
                   required: {
                     value: true,
                     message: "El usuario es requerido",
                   },
+                  onChange: (e) => setError(null),
                 })}
               />
               {errors.username && (
-                <span className="text-red-500 text-xs">{errors.username?.message?.toString()}</span>
+                <span className="text-red-500 text-xs">
+                  {errors.username?.message?.toString()}
+                </span>
               )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Contraseña</Label>
-              <Input id="password" type="password"
+              <Input
+                id="password"
+                type="password"
                 {...register("password", {
                   required: {
                     value: true,
@@ -78,26 +91,27 @@ export default function LoginPage() {
                 </span>
               )}
             </div>
+            {error && (
+              <span className="text-rose-500 text-sm">
+                Usuario o contraseña incorrecto
+              </span>
+            )}
           </CardContent>
           <CardFooter className="flex items-center justify-between">
-            <Button className="w-full">
-              Ingresar
-            </Button>
-            <Link
-              href="/"
-              className="ml-4"
-              prefetch={false}
-            >
-              <ArrowLeftIcon className="h-5 w-5" /> 
+            <Button className="w-full">Ingresar</Button>
+            <Link href="/auth" className="ml-4" prefetch={false}>
+              <ArrowLeftIcon className="h-5 w-5" />
             </Link>
           </CardFooter>
         </form>
       </Card>
     </div>
-  )
+  );
 }
 
-function ArrowLeftIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function ArrowLeftIcon(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}
@@ -114,5 +128,5 @@ function ArrowLeftIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>)
       <path d="m12 19-7-7 7-7" />
       <path d="M19 12H5" />
     </svg>
-  )
+  );
 }

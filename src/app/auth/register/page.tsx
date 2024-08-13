@@ -206,7 +206,7 @@ export default function Home() {
                                 Registrar
                             </Button>
                             <Link
-                                href="/"
+                                href="/auth"
                                 className="ml-4"
                                 prefetch={false}
                             >

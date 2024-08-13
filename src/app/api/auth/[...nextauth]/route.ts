@@ -25,7 +25,7 @@ export const Options = {
                 console.log(userFound)
 
                 const matchPassword = await bcrypt.compare(credentials?.password ?? '', userFound.password)
-                if (!matchPassword) throw new Error('Contraseña')
+                if (!matchPassword) throw new Error('Contraseña incorrecta')
 
                 return {
                     id: userFound.id,
