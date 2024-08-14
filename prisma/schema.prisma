@@ -23,7 +23,6 @@ enum UserType {
   assistant
 }
 
-
 model Distrito {
   id Int @id @default(autoincrement())
   name String
@@ -36,3 +35,4 @@ model Rutas {
   distritoId Int
   distrito Distrito @relation(fields: [distritoId], references: [id])
 }
+
