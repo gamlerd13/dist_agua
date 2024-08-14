@@ -22,3 +22,17 @@ enum UserType {
   carrier
   assistant
 }
+
+
+model Distrito {
+  id Int @id @default(autoincrement())
+  name String
+  rutas Rutas[]
+}
+
+model Rutas {
+  id Int @id @default(autoincrement())
+  name String
+  distritoId Int
+  distrito Distrito @relation(fields: [distritoId], references: [id])
+}
