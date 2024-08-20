@@ -36,3 +36,21 @@ model Rutas {
   distrito Distrito @relation(fields: [distritoId], references: [id])
 }
 
+model Product {
+    id Int @id @default(autoincrement())
+    name String
+    litros String
+    isReturnable Boolean
+    botlePrice Decimal
+    contentPrice Decimal
+    venta Venta[]
+}
+
+model Venta {
+    id Int @id @default(autoincrement())
+    // client //relacionar con cliente
+    productId Int
+    product Product @relation(fields: [productId], references: [id])
+    price Decimal
+    date DateTime
+}
