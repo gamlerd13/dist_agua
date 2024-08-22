@@ -5,7 +5,8 @@ import {
     Settings,
     ShieldCheck,
     CircleHelpIcon,
-    Calendar
+    Calendar,
+    MapPinned,
 } from 'lucide-react'
 
 export const dataGeneralSidebar = [
@@ -18,6 +19,11 @@ export const dataGeneralSidebar = [
         icon: Building2,
         label: "Clientes",
         href: "/clientes"
+    },
+    {
+        icon: MapPinned,
+        label: "Rutas",
+        href: "/locations"
     },
     {
         icon: Calendar,

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+
 import "./globals.css";
 
 const noto = Noto_Sans_Display({ subsets: ["latin"] });
@@ -20,6 +22,7 @@ export default function RootLayout({
       <body className={noto.className}>
         <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
