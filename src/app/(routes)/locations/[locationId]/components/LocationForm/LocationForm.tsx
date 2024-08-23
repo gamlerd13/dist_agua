@@ -17,11 +17,10 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LocationFromProps } from "./LocationForm.types";
 import { useLocationForm } from "./Hooks/useLocationForm";
+import { Location } from "@/interfaces/location";
 
-export function LocationForm(props: LocationFromProps) {
-  const { location } = props;
+export function LocationForm({ location }: { location: Location }) {
   const { form, onSubmit, districts } = useLocationForm(location);
 
   return (

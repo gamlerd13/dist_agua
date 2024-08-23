@@ -5,11 +5,12 @@ import axios from "axios";
 import { z } from "zod";
 
 import { toast } from "@/components/ui/use-toast";
-import { LocationFromProps } from "../LocationForm.types";
-import { formSchema } from "../LocationForm.form";
-import useDistricts from "../../../../Hooks/useDistricts";
 
-export function useLocationForm(location: LocationFromProps["location"]) {
+import { formSchema } from "./LocationForm.form";
+import useDistricts from "../../../../Hooks/useDistricts";
+import { Location } from "@/interfaces/location";
+
+export function useLocationForm(location: Location) {
   const router = useRouter();
   const { district: districts } = useDistricts();
 
