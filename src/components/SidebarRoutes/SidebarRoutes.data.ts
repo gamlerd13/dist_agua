@@ -7,6 +7,7 @@ import {
     CircleHelpIcon,
     Calendar,
     MapPinned,
+    PackageSearch,
 } from 'lucide-react'
 
 export const dataGeneralSidebar = [
@@ -24,6 +25,11 @@ export const dataGeneralSidebar = [
         icon: MapPinned,
         label: "Rutas",
         href: "/locations"
+    },
+    {
+        icon: PackageSearch,
+        label: "Productos",
+        href: "/products"
     },
     {
         icon: Calendar,
