@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -17,40 +17,70 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model Distrito {
+  id      Int       @id @default(autoincrement())
+  name    String
+  rutas   Rutas[]
+  Cliente Cliente[]
+}
+
+model Rutas {
+  id         Int       @id @default(autoincrement())
+  name       String
+  distritoId Int
+  distrito   Distrito  @relation(fields: [distritoId], references: [id])
+  Cliente    Cliente[]
+}
+
+model Product {
+  id           Int     @id @default(autoincrement())
+  name         String
+  litros       String
+  isReturnable Boolean
+  botlePrice   Decimal
+  contentPrice Decimal
+  venta        Venta[]
+}
+
+model Venta {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  price     Decimal
+  date      DateTime
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
 enum UserType {
   admin
   carrier
   assistant
 }
 
-model Distrito {
-  id Int @id @default(autoincrement())
-  name String
-  rutas Rutas[]
+model Cliente {
+  id            Int      @id @default(autoincrement())
+  nombres       String
+  apellidos     String
+  fechaCumple   DateTime
+  telefono      String
+  direccion     String
+  distritoId    Int
+  distrito      Distrito @relation(fields: [distritoId], references: [id])
+  modeloNegocio String
+  coordenadaX   Float
+  coordenadaY   Float
+  rutasId       Int
+  rutas         Rutas    @relation(fields: [rutasId], references: [id])
+  visitas       Visita[]
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
-model Rutas {
-  id Int @id @default(autoincrement())
-  name String
-  distritoId Int
-  distrito Distrito @relation(fields: [distritoId], references: [id])
-}
-
-model Product {
-    id Int @id @default(autoincrement())
-    name String
-    litros String
-    isReturnable Boolean
-    botlePrice Decimal
-    contentPrice Decimal
-    venta Venta[]
-}
-
-model Venta {
-    id Int @id @default(autoincrement())
-    // client //relacionar con cliente
-    productId Int
-    product Product @relation(fields: [productId], references: [id])
-    price Decimal
-    date DateTime
+model Visita {
+  id            Int      @id @default(autoincrement())
+  fechaVisita   DateTime
+  clienteId     Int
+  cliente       Cliente  @relation(fields: [clienteId], references: [id])
+  observaciones String?
+  createdAt     DateTime @default(now())
 }
