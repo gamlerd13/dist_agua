@@ -19,7 +19,7 @@ export const dataGeneralSidebar = [
     {
         icon: Building2,
         label: "Clientes",
-        href: "/clientes"
+        href: "/clients"
     },
     {
         icon: MapPinned,
