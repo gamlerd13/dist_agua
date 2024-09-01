@@ -5,29 +5,26 @@ import axios from "axios"
 import { z } from "zod"
 
 import { toast } from "@/components/ui/use-toast"
+import { TypeExpense } from "@/interfaces/typeExpense"
+import { formSchema } from "./TypeExpenseForm.form"
 
-import { formSchema } from "./ProductForm.form"
-import { Product, ProductEdit } from "@/interfaces/product"
-
-export function useProductForm(product: ProductEdit) {
+export function useTypeExpenseForm(typeExpense: TypeExpense) {
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: product.name,
-      litros: product.litros,
-      isReturnable: product.isReturnable,
-      botlePrice: parseFloat(product.botlePrice).toString(),
-      contentPrice: parseFloat(product.contentPrice).toString(),
+      description: typeExpense.description,
+      hasUnitOfMeasure: typeExpense.hasUnitOfMeasure,
+      unitOfMeasure: typeExpense.unitOfMeasure,
     },
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/product/${product.id}`, values)
+      await axios.patch(`/api/typeExpense/${typeExpense.id}`, values)
       toast({
-        title: "Producto actualizado!",
+        title: "Tipo de gasto actualizado!",
       })
       router.refresh()
     } catch (error) {

@@ -4,7 +4,7 @@ export type ProductInformationProps = {
         name: string,
         litros: string,
         isReturnable: boolean,
-        botlePrice: number,
+        botlePrice: string,
         contentPrice: number,
     };
 }

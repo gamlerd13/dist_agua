@@ -1,9 +1,9 @@
-import db from '@/lib/db'
-import { redirect } from 'next/navigation'
+import db from "@/lib/db"
+import { redirect } from "next/navigation"
 
-import { Header } from './components/Header'
-import { ProductInformation } from './components/ProductInformation'
-import { FooterProduct } from './components/FooterProduct/FooterProduct'
+import { Header } from "./components/Header"
+import { ProductInformation } from "./components/ProductInformation"
+import { FooterProduct } from "./components/FooterProduct/FooterProduct"
 
 export default async function ProductIdPage({
   params,
@@ -17,12 +17,12 @@ export default async function ProductIdPage({
   })
 
   if (!product) {
-    return redirect('/')
+    return redirect("/")
   }
 
   const productForClient = {
     ...product,
-    botlePrice: product.botlePrice.toNumber(),
+    botlePrice: product.botlePrice.toString(),
     contentPrice: product.contentPrice.toNumber(),
   }
 

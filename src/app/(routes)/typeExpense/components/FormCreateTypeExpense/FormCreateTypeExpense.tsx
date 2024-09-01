@@ -15,39 +15,33 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormCreateProductProps } from "./FormCreateProduct.types"
 import { Separator } from "@/components/ui/separator"
+import { FormCreateTypeExpenseProps } from "./FormCreateTypeExpense.types"
 
 const formSchema = z.object({
-  name: z.string().nonempty("El nombre del producto es requerido"),
-  litros: z.string().nonempty("Los litros del producto son requeridos"),
-  isReturnable: z.boolean(),
-  botlePrice: z.string().transform((value) => (value ? value : "0")),
-  contentPrice: z
-    .string()
-    .nonempty("El precio del contenido es requerido")
-    .transform((value) => Number(value)),
+  description: z.string().nonempty("El nombre del tipo de gasto es requerido"),
+  hasUnitOfMeasure: z.boolean(),
+  unitOfMeasure: z.string().optional(),
 })
 
-export function FormCreateProduct(props: FormCreateProductProps) {
-  const { setOpenModalCreate, createProduct } = props
+export function FormCreateTypeExpense(props: FormCreateTypeExpenseProps) {
+  const { setOpenModalCreate, createTypeExpense } = props
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      litros: "",
-      isReturnable: false,
-      botlePrice: "0",
-      contentPrice: 0,
+      description: "",
+      hasUnitOfMeasure: false,
+      unitOfMeasure: "",
     },
     mode: "onChange",
   })
 
   const { isValid } = form.formState
+  const hasUnitOfMeasure = form.watch("hasUnitOfMeasure")
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    createProduct(values)
+    createTypeExpense(values)
     setOpenModalCreate(false)
   }
 
@@ -58,13 +52,13 @@ export function FormCreateProduct(props: FormCreateProductProps) {
           <div className="grid grid-cols-2 gap-3">
             <FormField
               control={form.control}
-              name="name"
+              name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre del producto</FormLabel>
+                  <FormLabel>Nombre del tipo de gasto</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Nombre del producto ..."
+                      placeholder="Nombre del tipo de gasto ..."
                       type="text"
                       {...field}
                     />
@@ -75,49 +69,16 @@ export function FormCreateProduct(props: FormCreateProductProps) {
             />
             <FormField
               control={form.control}
-              name="litros"
+              name="unitOfMeasure"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Litros del producto</FormLabel>
+                  <FormLabel>Unidad de medida</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Litros del producto ..."
+                      placeholder="Nombre de la unidad de medida ..."
                       type="text"
                       {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="botlePrice"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Precio de la botella</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Precio de la botella ..."
-                      type="number"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="contentPrice"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Precio del contenido</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Precio del contenido ..."
-                      type="number"
-                      {...field}
+                      disabled={!hasUnitOfMeasure} // Habilitar o deshabilitar según el valor de hasUnitOfMeasure
                     />
                   </FormControl>
                   <FormMessage />
@@ -128,7 +89,7 @@ export function FormCreateProduct(props: FormCreateProductProps) {
           <Separator />
           <FormField
             control={form.control}
-            name="isReturnable"
+            name="hasUnitOfMeasure"
             render={({ field }) => (
               <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
                 <FormControl>
@@ -138,16 +99,17 @@ export function FormCreateProduct(props: FormCreateProductProps) {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>¿Es retornable?</FormLabel>
+                  <FormLabel>¿Tiene unidad de medida?</FormLabel>
                   <p className="text-sm text-muted-foreground">
-                    Marque esta casilla si el producto es retornable
+                    Marque esta casilla si el tipo de gasto tiene una unidad de
+                    medida
                   </p>
                 </div>
               </FormItem>
             )}
           />
           <Button type="submit" disabled={!isValid}>
-            Crear producto
+            Crear tipo de gasto
           </Button>
         </form>
       </Form>

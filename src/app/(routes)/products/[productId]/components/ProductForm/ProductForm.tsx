@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   Form,
@@ -7,13 +7,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Product, ProductEdit } from '@/interfaces/product'
-import { useProductForm } from './Hooks/useProductFrom'
-import { Separator } from '@/components/ui/separator'
-import { Checkbox } from '@/components/ui/checkbox'
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Product, ProductEdit } from "@/interfaces/product"
+import { useProductForm } from "./Hooks/useProductForm"
+import { Separator } from "@/components/ui/separator"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export function ProductForm({ product }: { product: Product }) {
   const productWithDecimal = {

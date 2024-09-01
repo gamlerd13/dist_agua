@@ -3,11 +3,11 @@ import {
     Building2,
     PanelsTopLeft,
     Settings,
-    ShieldCheck,
     CircleHelpIcon,
     Calendar,
     MapPinned,
     PackageSearch,
+    CircleDollarSign,
 } from 'lucide-react'
 
 export const dataGeneralSidebar = [
@@ -57,9 +57,21 @@ export const dataSupportSidebar = [
         label: "Configuración",
         href: "/configuracion"
     },
+]
+
+export const dataSidebarExpenses = [
     {
-        icon: ShieldCheck,
-        label: "Lo que sea xd",
-        href: "/xd"
-    },
+        title: "Gastos",
+        icon: CircleDollarSign,
+        children : [
+            {
+                label: "Tipo de gasto",
+                href: "/typeExpense",
+            },
+            {
+                label: "Gastos",
+                href: "/expenses",
+            },
+        ]
+    }
 ]

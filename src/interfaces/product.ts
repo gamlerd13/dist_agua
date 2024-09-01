@@ -3,7 +3,7 @@ export interface ProductMain{
   name: string,
   litros: string,
   isReturnable: boolean,
-  botlePrice: number,
+  botlePrice: string,
   contentPrice: number,
 }
 export type ProductPost = Omit<ProductMain, 'id'>

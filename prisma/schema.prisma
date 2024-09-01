@@ -84,3 +84,25 @@ model Visita {
   observaciones String?
   createdAt     DateTime @default(now())
 }
+
+model TypeOfExpense {
+  id               Int     @id @default(autoincrement())
+  description      String
+  hasUnitOfMeasure Boolean
+  unitOfMeasure    String?
+
+  expenses Expense[]
+}
+
+model Expense {
+  id              Int      @id @default(autoincrement())
+  description     String
+  date            DateTime @default(now())
+  typeOfExpenseId Int
+  amount          Float
+  price           Decimal
+  total           Decimal
+  Observation     String
+
+  typeOfExpense TypeOfExpense @relation(fields: [typeOfExpenseId], references: [id])
+}
