@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Form,
@@ -7,21 +7,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/components/ui/form"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useLocationForm } from "./Hooks/useLocationForm";
-import { Location } from "@/interfaces/location";
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { useLocationForm } from "./Hooks/useLocationForm"
+import { Location } from "@/interfaces/location"
 
 export function LocationForm({ location }: { location: Location }) {
-  const { form, onSubmit, districts } = useLocationForm(location);
+  const { form, onSubmit, districts } = useLocationForm(location)
 
   return (
     <Form {...form}>
@@ -35,7 +35,7 @@ export function LocationForm({ location }: { location: Location }) {
                 <FormLabel>Nombre de la ruta</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="nombre de la ruta..."
+                    placeholder="Nombre de la ruta..."
                     type="text"
                     {...field}
                   />
@@ -77,5 +77,5 @@ export function LocationForm({ location }: { location: Location }) {
         <Button type="submit">Actualizar ruta</Button>
       </form>
     </Form>
-  );
+  )
 }

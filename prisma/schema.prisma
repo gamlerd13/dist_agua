@@ -91,7 +91,7 @@ model TypeOfExpense {
   hasUnitOfMeasure Boolean
   unitOfMeasure    String?
 
-  expenses Expense[]
+  expense Expense[]
 }
 
 model Expense {
@@ -99,10 +99,10 @@ model Expense {
   description     String
   date            DateTime @default(now())
   typeOfExpenseId Int
-  amount          Float
+  amount          Decimal
   price           Decimal
   total           Decimal
-  Observation     String
+  observation     String
 
   typeOfExpense TypeOfExpense @relation(fields: [typeOfExpenseId], references: [id])
 }
