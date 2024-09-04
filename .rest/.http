@@ -1,0 +1,26 @@
+
+
+### create firts user
+POST http://localhost:3000/api/auth/register/
+Content-Type: application/json
+
+{
+  "username":"admin",
+  "typeUser":"admin",
+  "email":"admin@gmail.com",
+  "password": "admin"
+}
+
+### create distrito
+POST http://localhost:3000/api/district/
+Content-Type: application/json
+
+{
+  "districts": [
+    { "name": "LA UNION"},
+    { "name": "PAITA"},
+    { "name": "DALIAS-PIURA"},
+    { "name": "PIURA"},
+    { "name": "TAMBOGRANDE"},
+  ]
+}
