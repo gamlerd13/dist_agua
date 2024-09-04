@@ -36,7 +36,6 @@ export function useClientForm(client: ClientEdit) {
     try {
       await axios.patch(`/api/client/${client.id}`, {
         ...values,
-        fechaCumple: new Date(values.fechaCumple),
         coordenadaX: values.coordenadaX,
         coordenadaY: values.coordenadaY,
       });

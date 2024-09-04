@@ -5,7 +5,7 @@ export const formSchema = z.object({
   apellidos: z.string().nonempty('El apellido es requerido'),
   telefono: z.string().nonempty('El teléfono es requerido'),
   direccion: z.string().nonempty('La dirección es requerida'),
-  fechaCumple: z.string().nonempty('La fecha de cumpleaños es requerida'),
+  fechaCumple: z.date(),
   modeloNegocio: z.string().nonempty('El modelo de negocio es requerido'),
   rutaId: z.number().int(),
   pedidoConcurrencia: z.number().int(),

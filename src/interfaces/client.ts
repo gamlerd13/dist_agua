@@ -1,7 +1,7 @@
 interface ClientBase {
   nombres: string
   apellidos: string
-  fechaCumple: string
+  fechaCumple: Date | undefined
   telefono: string
   direccion: string
   modeloNegocio: string

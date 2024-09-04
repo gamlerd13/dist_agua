@@ -15,6 +15,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { cn } from '@/lib/utils';
+
+import CalendarioScrollable from '@/components/Calendario/CalendarioScrollable';
 import { FormCreateClientProps } from './FormCreateLocation.types'
 
 const formSchema = z.object({
@@ -22,7 +30,7 @@ const formSchema = z.object({
   apellidos: z.string().nonempty('El apellido es requerido'),
   telefono: z.string().nonempty('El teléfono es requerido'),
   direccion: z.string().nonempty('La dirección es requerida'),
-  fechaCumple: z.string().nonempty('La fecha de cumpleaños es requerida'),
+  fechaCumple: z.date(),
   modeloNegocio: z.string().nonempty('El modelo de negocio es requerido'),
   rutaId: z.number().int(),
   pedidoConcurrencia: z.number().int(),
@@ -40,7 +48,7 @@ export function FormCreateClient(props: FormCreateClientProps) {
       apellidos: '',
       telefono: '',
       direccion: '',
-      fechaCumple: '',
+      fechaCumple: undefined,
       modeloNegocio: '',
       rutaId: undefined,
       pedidoConcurrencia: 0,
@@ -92,9 +100,10 @@ export function FormCreateClient(props: FormCreateClientProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Fecha de Cumpleaños</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
+                  <CalendarioScrollable
+                    selected={field.value ? new Date(field.value) : undefined}
+                    onSelect={field.onChange}
+                  />
                   <FormMessage />
                 </FormItem>
               )}

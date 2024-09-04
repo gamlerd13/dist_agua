@@ -22,7 +22,6 @@ export default async function ClientIdPage({
 
   const clientForClient = {
     ...client,
-    fechaCumple: client.fechaCumple.toString(),
     createdAt: new Date(client.createdAt),
     updatedAt: new Date(client.updatedAt),
     coordenadaX: client.coordenadaX.toString(),
