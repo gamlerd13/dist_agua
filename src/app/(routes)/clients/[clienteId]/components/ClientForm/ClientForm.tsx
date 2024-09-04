@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useClientForm } from './Hooks/useClientForm'
 import { ClientEdit } from '@/interfaces/client'
 import { Checkbox } from '@/components/ui/checkbox'
-import CalendarioScrollable from '@/components/Calendario/CalendarioScrollable'
+import { CustomCalendar } from "@/components/Calendario/CustomCalendar"
 
 export function ClientForm({ client }: { client: ClientEdit }) {
   const { form, onSubmit, locations } = useClientForm(client);
@@ -63,7 +63,11 @@ export function ClientForm({ client }: { client: ClientEdit }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Fecha de Cumpleaños</FormLabel>
-                <CalendarioScrollable
+                {/* <CalendarioScrollable
+                  selected={field.value ? new Date(field.value) : undefined}
+                  onSelect={field.onChange}
+                /> */}
+                <CustomCalendar
                   selected={field.value ? new Date(field.value) : undefined}
                   onSelect={field.onChange}
                 />
