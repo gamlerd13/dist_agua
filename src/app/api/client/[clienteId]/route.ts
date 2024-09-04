@@ -1,4 +1,3 @@
-// api/clientes/[clienteId]/route.ts
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 
@@ -10,12 +9,9 @@ export async function PATCH(req: Request, { params }: { params: { clienteId: str
     console.log("clienteAPI:", clienteId)
     const data = await req.json();
 
-    // Asegúrate de que los datos sean del tipo correcto
     const updatedData = {
       ...data,
-      coordenadaX: parseFloat(data.coordenadaX),
-      coordenadaY: parseFloat(data.coordenadaY),
-      fechaCumple: new Date(data.fechaCumple), // Convierte a Date
+      fechaCumple: new Date(data.fechaCumple),
     };
 
     const updatedCliente = await db.cliente.update({
@@ -53,8 +49,7 @@ export async function GET(req: Request, { params }: { params: { clienteId: strin
     const cliente = await db.cliente.findUnique({
       where: { id: clienteId },
       include: {
-        distrito: true,
-        rutas: true,
+        ruta: true,
         visitas: true,
       }
     });

@@ -18,10 +18,9 @@ model User {
 }
 
 model Distrito {
-  id      Int       @id @default(autoincrement())
-  name    String
-  rutas   Rutas[]
-  Cliente Cliente[]
+  id    Int     @id @default(autoincrement())
+  name  String
+  rutas Rutas[]
 }
 
 model Rutas {
@@ -57,23 +56,22 @@ enum UserType {
 }
 
 model Cliente {
-  id            Int      @id @default(autoincrement())
-  nombres       String
-  apellidos     String
-  fechaCumple   DateTime
-  telefono      String
-  direccion     String
-  distritoId    Int
-  distrito      Distrito @relation(fields: [distritoId], references: [id])
-  modeloNegocio String
-  coordenadaX   Float
-  coordenadaY   Float
-  rutasId       Int
-  rutas         Rutas    @relation(fields: [rutasId], references: [id])
-  visitas       Visita[]
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                 Int      @id @default(autoincrement())
+  nombres            String
+  apellidos          String
+  fechaCumple        DateTime
+  telefono           String
+  direccion          String
+  modeloNegocio      String
+  coordenadaX        Decimal
+  coordenadaY        Decimal
+  rutaId             Int
+  ruta               Rutas    @relation(fields: [rutaId], references: [id])
+  visitas            Visita[]
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  pedidoConcurrencia Int      @default(0)
 }
 
 model Visita {

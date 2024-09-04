@@ -16,7 +16,7 @@ import { ClientEdit } from '@/interfaces/client'
 import { Checkbox } from '@/components/ui/checkbox'
 
 export function ClientForm({ client }: { client: ClientEdit }) {
-  const { form, onSubmit, districts } = useClientForm(client);
+  const { form, onSubmit, locations } = useClientForm(client);
 
   return (
     <Form {...form}>
@@ -64,7 +64,6 @@ export function ClientForm({ client }: { client: ClientEdit }) {
                 <FormLabel>Fecha de Cumpleaños</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Fecha de cumpleaños (YYYY-MM-DD)"
                     type="date"
                     {...field}
                   />
@@ -109,26 +108,26 @@ export function ClientForm({ client }: { client: ClientEdit }) {
           />
           <FormField
             control={form.control}
-            name="distritoId"
+            name="rutaId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Distrito</FormLabel>
+                <FormLabel>Ruta</FormLabel>
                 <Select
                   onValueChange={(value) => field.onChange(parseInt(value))}
-                  defaultValue={field.value.toString()}
+                  defaultValue={field.value?.toString()}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Seleccionar distrito" />
+                      <SelectValue placeholder="Seleccionar ruta" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {districts?.map((district) => (
+                    {locations?.map((location) => (
                       <SelectItem
-                        key={district.id}
-                        value={district.id.toString()}
+                        key={location.id}
+                        value={location.id.toString()}
                       >
-                        {district.name}
+                        {location.name} - {location.distrito}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -163,7 +162,6 @@ export function ClientForm({ client }: { client: ClientEdit }) {
                 <FormControl>
                   <Input
                     placeholder="Coordenada X"
-                    type="number"
                     {...field}
                   />
                 </FormControl>
@@ -180,7 +178,6 @@ export function ClientForm({ client }: { client: ClientEdit }) {
                 <FormControl>
                   <Input
                     placeholder="Coordenada Y"
-                    type="number"
                     {...field}
                   />
                 </FormControl>

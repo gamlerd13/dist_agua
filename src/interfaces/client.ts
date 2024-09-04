@@ -1,50 +1,26 @@
-// interfaces/client.ts
-
-export interface Client {
-  id: number
+interface ClientBase {
   nombres: string
   apellidos: string
   fechaCumple: string
   telefono: string
   direccion: string
-  distritoId: number
   modeloNegocio: string
-  coordenadaX: number
-  coordenadaY: number
-  rutasId: number
   isActive: boolean
+  pedidoConcurrencia: number
+  rutaId: number
+}
+
+export interface Client extends ClientBase {
+  id: number
   createdAt: Date
   updatedAt: Date
 }
 
-export interface ClientPost {
-  nombres: string
-  apellidos: string
-  fechaCumple: string
-  telefono: string
-  direccion: string
-  distritoId: number
-  modeloNegocio: string
-  coordenadaX: number
-  coordenadaY: number
-  isActive: boolean
-  rutasId: number
-}
+export interface ClientPost extends ClientBase { }
 
-// interfaces/client.ts
-
-export interface ClientEdit {
+export interface ClientEdit extends ClientBase {
   id: number
-  nombres: string
-  apellidos: string
-  fechaCumple: string
-  telefono: string
-  direccion: string
-  distritoId: number
-  modeloNegocio: string
-  coordenadaX: number
-  coordenadaY: number
-  rutasId: number
-  isActive: boolean
+  coordenadaX: string
+  coordenadaY: string
   updatedAt: Date
 }

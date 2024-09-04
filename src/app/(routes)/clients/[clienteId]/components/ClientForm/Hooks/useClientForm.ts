@@ -5,14 +5,14 @@ import axios from "axios";
 import { z } from "zod";
 
 import { toast } from "@/components/ui/use-toast";
-import useDistricts from "@/app/(routes)/locations/Hooks/useDistricts";
+import useLocation from "@/app/(routes)/locations/components/Hooks/useLocations"
 import { formSchema } from "./ClientForm.form";
 import { ClientEdit } from "@/interfaces/client";
 
 export function useClientForm(client: ClientEdit) {
 
   const router = useRouter();
-  const { district: districts } = useDistricts();
+  const { location: locations } = useLocation();
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -27,7 +27,8 @@ export function useClientForm(client: ClientEdit) {
       coordenadaY: client.coordenadaY,
       modeloNegocio: client.modeloNegocio,
       isActive: client.isActive,
-      distritoId: client.distritoId
+      rutaId: client.rutaId,
+      pedidoConcurrencia: client.pedidoConcurrencia,
     },
   });
 
@@ -51,5 +52,5 @@ export function useClientForm(client: ClientEdit) {
     }
   };
 
-  return { form, onSubmit, districts };
+  return { form, onSubmit, locations };
 }
