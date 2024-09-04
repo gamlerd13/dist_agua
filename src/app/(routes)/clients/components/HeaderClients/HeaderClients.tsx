@@ -11,15 +11,15 @@ import {
 } from '@/components/ui/dialog'
 import { FormCreateClient } from '../FormCreateClient'
 import { ClientPost } from '@/interfaces/client'
+import { LocationDistrict } from '@/interfaces/location'
 import { useState } from 'react'
-import { District } from "@/interfaces/district";
 
 export function HeaderClients({
   createClient,
-  districts,
+  locations,
 }: {
   createClient: (values: ClientPost) => void
-  districts: District[] | null;
+  locations: LocationDistrict[] | null
 }) {
   const [openModalCreate, setOpenModalCreate] = useState(false)
 
@@ -41,7 +41,7 @@ export function HeaderClients({
           <FormCreateClient
             createClient={createClient}
             setOpenModalCreate={setOpenModalCreate}
-            districts={districts}
+            locations={locations}
           />
         </DialogContent>
       </Dialog>

@@ -15,40 +15,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormCreateLocationProps } from '@/app/(routes)/locations/components/FormCreateLocation/FormCreateLocation.types'
+
+
+import { CustomCalendar } from '@/components/Calendario/CustomCalendar';
 import { FormCreateClientProps } from './FormCreateLocation.types'
 
 const formSchema = z.object({
   nombres: z.string().nonempty('El nombre es requerido'),
   apellidos: z.string().nonempty('El apellido es requerido'),
-  fechaCumple: z.string().nonempty('La fecha de cumpleaños es requerida'),
   telefono: z.string().nonempty('El teléfono es requerido'),
   direccion: z.string().nonempty('La dirección es requerida'),
-  distritoId: z.number().int().positive('El distrito es requerido'),
+  fechaCumple: z.date(),
   modeloNegocio: z.string().nonempty('El modelo de negocio es requerido'),
-  coordenadaX: z.number().nonnegative('La coordenada X es requerida'),
-  coordenadaY: z.number().nonnegative('La coordenada Y es requerida'),
-  rutasId: z.number().int().positive('La ruta es requerida'),
+  rutaId: z.number().int(),
+  pedidoConcurrencia: z.number().int(),
   isActive: z.boolean().optional().default(true),
 })
 
 export function FormCreateClient(props: FormCreateClientProps) {
 
-  const { setOpenModalCreate, createClient, districts } = props;
+  const { setOpenModalCreate, createClient, locations } = props;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombres: '',
       apellidos: '',
-      fechaCumple: '',
       telefono: '',
       direccion: '',
-      distritoId: undefined,
+      fechaCumple: undefined,
       modeloNegocio: '',
-      coordenadaX: 0,
-      coordenadaY: 0,
-      rutasId: 1,
+      rutaId: undefined,
+      pedidoConcurrencia: 0,
       isActive: true,
     },
   })
@@ -72,7 +70,7 @@ export function FormCreateClient(props: FormCreateClientProps) {
                 <FormItem>
                   <FormLabel>Nombres</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nombres del cliente ..." {...field} />
+                    <Input placeholder="Nombre del cliente ..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,9 +95,10 @@ export function FormCreateClient(props: FormCreateClientProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Fecha de Cumpleaños</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
+                  <CustomCalendar
+                    selected={field.value ? new Date(field.value) : undefined}
+                    onSelect={field.onChange}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -132,26 +131,26 @@ export function FormCreateClient(props: FormCreateClientProps) {
             />
             <FormField
               control={form.control}
-              name="distritoId"
+              name="rutaId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Distrito</FormLabel>
+                  <FormLabel>Ruta</FormLabel>
                   <Select
                     onValueChange={(value) => field.onChange(parseInt(value))}
                     defaultValue={field.value?.toString()}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Seleccionar distrito" />
+                        <SelectValue placeholder="Seleccionar ruta" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {districts?.map((district) => (
+                      {locations?.map((location) => (
                         <SelectItem
-                          key={district.id}
-                          value={district.id.toString()}
+                          key={location.id}
+                          value={location.id.toString()}
                         >
-                          {district.name}
+                          {location.name} - {location.distrito}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -175,49 +174,16 @@ export function FormCreateClient(props: FormCreateClientProps) {
             />
             <FormField
               control={form.control}
-              name="coordenadaX"
+              name="pedidoConcurrencia"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Coordenada X</FormLabel>
+                  <FormLabel>Concurrencia de Pedido</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Coordenada X ..."
+                      placeholder="0"
                       {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="coordenadaY"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Coordenada Y</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Coordenada Y ..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="rutasId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ruta</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="ID de la ruta ..."
-                      {...field}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
