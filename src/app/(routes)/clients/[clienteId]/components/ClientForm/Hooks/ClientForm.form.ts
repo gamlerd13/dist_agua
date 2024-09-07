@@ -10,6 +10,4 @@ export const formSchema = z.object({
   rutaId: z.number().int(),
   pedidoConcurrencia: z.number().int(),
   isActive: z.boolean(),
-  coordenadaX: z.string(),
-  coordenadaY: z.string(),
 });

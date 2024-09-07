@@ -18,25 +18,19 @@ export function useClientForm(client: ClientEdit) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nombres: client.nombres,
-      apellidos: client.apellidos,
-      telefono: client.telefono,
-      direccion: client.direccion,
-      fechaCumple: client.fechaCumple,
-      modeloNegocio: client.modeloNegocio,
-      isActive: client.isActive,
-      rutaId: client.rutaId,
-      pedidoConcurrencia: client.pedidoConcurrencia,
+      coordenadaX: client.coordenadaX,
+      coordenadaY: client.coordenadaY,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/client/${client.id}`, {
-        ...values,
+      await axios.patch(`/api/client/${client.id}/map`, {
+        coordenadaX: values.coordenadaX,
+        coordenadaY: values.coordenadaY,
       });
       toast({
-        title: "Cliente actualizado!",
+        title: "Coordenadas actualizadas!",
       });
       router.refresh();
     } catch (error) {

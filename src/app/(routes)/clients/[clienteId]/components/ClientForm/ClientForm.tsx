@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   Form,
@@ -7,17 +7,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useClientForm } from './Hooks/useClientForm'
-import { ClientEdit } from '@/interfaces/client'
-import { Checkbox } from '@/components/ui/checkbox'
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useClientForm } from "./Hooks/useClientForm"
+import { ClientEdit } from "@/interfaces/client"
+import { Checkbox } from "@/components/ui/checkbox"
 import { CustomCalendar } from "@/components/Calendario/CustomCalendar"
 
 export function ClientForm({ client }: { client: ClientEdit }) {
-  const { form, onSubmit, locations } = useClientForm(client);
+  const { form, onSubmit, locations } = useClientForm(client)
 
   return (
     <Form {...form}>
@@ -149,38 +155,6 @@ export function ClientForm({ client }: { client: ClientEdit }) {
                   <Input
                     placeholder="Modelo de negocio..."
                     type="text"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="coordenadaX"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Coordenada X</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Coordenada X"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="coordenadaY"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Coordenada Y</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Coordenada Y"
                     {...field}
                   />
                 </FormControl>

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { format } from "date-fns"
 import { es } from "date-fns/locale"
 import { Calendar as CalendarIcon } from "lucide-react"
-import { Calendar } from "@/components/ui/calendar"
+import { CustomCalendar } from "@/components/Calendario/CustomCalendar"
 import {
   Popover,
   PopoverContent,
@@ -148,39 +148,15 @@ export function ExpenseForm({ expense }: { expense: Expense }) {
             name="date"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Fecha</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP", { locale: es })
-                        ) : (
-                          <span>Selecciona una fecha</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                      locale={es}
-                    />
-                  </PopoverContent>
-                </Popover>
+                <FormLabel>Fecha de gasto</FormLabel>
+                {/* <CalendarioScrollable
+                  selected={field.value ? new Date(field.value) : undefined}
+                  onSelect={field.onChange}
+                /> */}
+                <CustomCalendar
+                  selected={field.value ? new Date(field.value) : undefined}
+                  onSelect={field.onChange}
+                />
                 <FormMessage />
               </FormItem>
             )}

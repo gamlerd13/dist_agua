@@ -25,7 +25,7 @@ export default async function ClientIdPage({
     createdAt: new Date(client.createdAt),
     updatedAt: new Date(client.updatedAt),
     coordenadaX: client.coordenadaX.toString(),
-    coordenadaY: client.coordenadaX.toString(),
+    coordenadaY: client.coordenadaY.toString(),
   }
 
   return (

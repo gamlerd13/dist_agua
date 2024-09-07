@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 
 import "./globals.css"
+import "leaflet/dist/leaflet.css"
 
 const noto = Noto_Sans_Display({ subsets: ["latin"] })
 
