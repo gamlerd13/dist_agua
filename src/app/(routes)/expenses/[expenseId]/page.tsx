@@ -19,7 +19,7 @@ export default async function ExpenseIdPage({
     return redirect("/")
   }
 
-  const expenseForClient = {
+  const expenseInformation = {
     ...expense,
     amount: expense.amount.toNumber(),
     price: expense.price.toNumber(),
@@ -29,7 +29,7 @@ export default async function ExpenseIdPage({
   return (
     <div>
       <Header />
-      <ExpenseInformation expense={expenseForClient} />
+      <ExpenseInformation expense={expenseInformation} />
       <FooterExpense expenseId={expense.id} />
     </div>
   )

@@ -38,14 +38,40 @@ export const columns: ColumnDef<ExpenseTypeExpense>[] = [
   {
     accessorKey: "price",
     header: "Precio",
+    cell: ({ getValue }) => {
+      const price = getValue() as number
+      const formattedPrice = new Intl.NumberFormat("es-PE", {
+        style: "currency",
+        currency: "PEN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(price)
+
+      return <span>{formattedPrice}</span>
+    },
   },
   {
     accessorKey: "amount",
     header: "Cantidad",
   },
   {
+    accessorKey: "unitOfMeasure",
+    header: "Unidad de medida",
+  },
+  {
     accessorKey: "total",
     header: "Total",
+    cell: ({ getValue }) => {
+      const total = getValue() as number
+      const formattedTotal = new Intl.NumberFormat("es-PE", {
+        style: "currency",
+        currency: "PEN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(total)
+
+      return <span>{formattedTotal}</span>
+    },
   },
   {
     accessorKey: "date",

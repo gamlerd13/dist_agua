@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -9,37 +7,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { ExpensePost } from "@/interfaces/expense"
-import { TypeExpense } from "@/interfaces/typeExpense"
-
 import { useState } from "react"
-import { FormCreateExpense } from "../FormCreateExpense"
+import { FormCreateSale } from "../FormCreateSale"
+import { SalePost } from "@/interfaces/sale"
+import { GetClient } from "@/interfaces/client"
 
-export function HeaderExpenses({
-  createExpense,
-  typeExpense,
+export function HeaderSales({
+  createSale,
+  client,
 }: {
-  createExpense: (values: ExpensePost) => void
-  typeExpense: TypeExpense[] | null
+  createSale: (values: SalePost) => void
+  client: GetClient[] | null
 }) {
   const [openModalCreate, setOpenModalCreate] = useState(false)
   return (
     <div className="flex justify-between items-center">
-      <h2 className="text-2xl">Lista de gastos</h2>
+      <h2 className="text-2xl">Lista de ventas</h2>
 
       <Dialog open={openModalCreate} onOpenChange={setOpenModalCreate}>
         <DialogTrigger asChild>
-          <Button>Crear Gasto</Button>
+          <Button>Crear Venta</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
-            <DialogTitle>Crear Gasto</DialogTitle>
-            <DialogDescription>Crear y configurar su gasto</DialogDescription>
+            <DialogTitle>Crear Venta</DialogTitle>
+            <DialogDescription>Crear y configurar su venta</DialogDescription>
           </DialogHeader>
-          <FormCreateExpense
-            createExpense={createExpense}
+          <FormCreateSale
+            createSale={createSale}
             setOpenModalCreate={setOpenModalCreate}
-            typeExpense={typeExpense}
+            client={client}
           />
         </DialogContent>
       </Dialog>

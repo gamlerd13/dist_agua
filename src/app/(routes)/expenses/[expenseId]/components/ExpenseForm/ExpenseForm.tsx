@@ -1,15 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { format } from "date-fns"
-import { es } from "date-fns/locale"
-import { Calendar as CalendarIcon } from "lucide-react"
 import { CustomCalendar } from "@/components/Calendario/CustomCalendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import {
   Form,
   FormControl,
@@ -27,7 +19,6 @@ import {
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { Expense } from "@/interfaces/expense"
 import { useExpenseForm } from "./Hooks/useExpenseForm"
 

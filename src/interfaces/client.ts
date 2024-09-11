@@ -24,3 +24,22 @@ export interface ClientEdit extends ClientBase {
   coordenadaY: string
   updatedAt: Date
 }
+
+export interface ClientMain{
+  id?: number,
+  nombres: string,
+  apellidos: string,
+  fechaCumple: Date,
+  telefono: string,
+  direccion: string,
+  modeloNegocio: string,
+  coordenadaX: string,
+  coordenadaY: string,
+  rutaId: number,
+  ruta: string,
+  distrito: string,
+  pedidoConcurrencia: number,
+  isActive: boolean,
+}
+
+export type GetClient = Required<ClientMain>

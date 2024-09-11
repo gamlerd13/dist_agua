@@ -4,7 +4,7 @@ import {
     PanelsTopLeft,
     Settings,
     CircleHelpIcon,
-    Calendar,
+    HandCoins,
     MapPinned,
     PackageSearch,
     CircleDollarSign,
@@ -32,9 +32,9 @@ export const dataGeneralSidebar = [
         href: "/products"
     },
     {
-        icon: Calendar,
-        label: "Calendario",
-        href: "/calendario"
+        icon: HandCoins,
+        label: "Ventas",
+        href: "/sales"
     },
 ]
 

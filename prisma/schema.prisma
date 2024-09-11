@@ -32,21 +32,13 @@ model Rutas {
 }
 
 model Product {
-  id           Int     @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   name         String
   litros       String
   isReturnable Boolean
   botlePrice   Decimal
   contentPrice Decimal
-  venta        Venta[]
-}
-
-model Venta {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  price     Decimal
-  date      DateTime
-  product   Product  @relation(fields: [productId], references: [id])
+  saleDetail   SaleDetail[]
 }
 
 enum UserType {
@@ -72,6 +64,7 @@ model Cliente {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   pedidoConcurrencia Int      @default(0)
+  sale               Sale[]
 }
 
 model Visita {
@@ -103,4 +96,41 @@ model Expense {
   observation     String
 
   typeOfExpense TypeOfExpense @relation(fields: [typeOfExpenseId], references: [id])
+}
+
+model Sale {
+  id            Int           @id @default(autoincrement())
+  clientId      Int
+  client        Cliente       @relation(fields: [clientId], references: [id])
+  saleDate      DateTime      @default(now())
+  totalRevenue  Decimal
+  status        SaleStatus
+  paymentMethod PaymentMethod
+  notes         String
+  saleDetail    SaleDetail[]
+}
+
+model SaleDetail {
+  id          Int     @id @default(autoincrement())
+  saleId      Int
+  sale        Sale    @relation(fields: [saleId], references: [id])
+  productId   Int
+  product     Product @relation(fields: [productId], references: [id])
+  bottlePrice Decimal
+  quantity    Int
+  revenue     Decimal
+}
+
+enum SaleStatus {
+  completed
+  pending
+}
+
+enum PaymentMethod {
+  undefined
+  cash
+  yape
+  izipay
+  plin
+  credit
 }

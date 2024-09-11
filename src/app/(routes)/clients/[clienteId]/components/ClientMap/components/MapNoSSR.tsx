@@ -57,7 +57,7 @@ export default function MapWithNoSSR({
     <MapContainer
       center={[lat, lng]}
       zoom={13}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       style={{ height: "400px", width: "100%" }}
     >
       <TileLayer

@@ -36,7 +36,8 @@ export async function GET() {
             price: expense.price,
             total: expense.total,
             observation: expense.observation,
-            typeOfExpense: expense.typeOfExpense.description
+            typeOfExpense: expense.typeOfExpense.description,
+            unitOfMeasure: expense.typeOfExpense.unitOfMeasure,
           }))
 
         return NextResponse.json(expenseTypeExpense, { status: 200 });

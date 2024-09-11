@@ -9,18 +9,6 @@ export interface ExpenseMain{
   observation: string,
 }
 
-export interface ExpenseUnitOfMeasureMain{
-  id: number,
-  description: string,
-  date: Date,
-  typeOfExpenseId: number,
-  amount: number,
-  price: number,
-  total: string,
-  observation: string,
-  unitOfMeasure?: string
-}
-
 export type ExpensePost = Omit<ExpenseMain, 'id' | 'date'>
 export type Expense = Required<ExpenseMain>
 
@@ -44,4 +32,5 @@ export interface ExpenseTypeExpense{
   price: number,
   total: string,
   observation: string,
+  unitOfMeasure: string,
 }
