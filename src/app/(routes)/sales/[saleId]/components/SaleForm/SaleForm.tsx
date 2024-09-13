@@ -89,6 +89,34 @@ export function SaleForm({ sale }: { sale: Sale }) {
           />
           <FormField
             control={form.control}
+            name="paymentMethod"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Método de pago</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona el estado de la venta" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="undefined">Por definir</SelectItem>
+                    <SelectItem value="cash">Efectivo</SelectItem>
+                    <SelectItem value="yape">YAPE</SelectItem>
+                    <SelectItem value="izipay">IZIPAY</SelectItem>
+                    <SelectItem value="plin">PLIN</SelectItem>
+                    <SelectItem value="credit">Crédito</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="status"
             render={({ field }) => (
               <FormItem>

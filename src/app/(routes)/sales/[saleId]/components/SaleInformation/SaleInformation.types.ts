@@ -1,4 +1,5 @@
 export type SaleInformationProps = {
+  saleId: number;
   sale: {
     id: number,
     clientId: number,

@@ -27,7 +27,7 @@ export default async function SaleIdPage({
   return (
     <div>
       <Header />
-      <SaleInformation sale={saleInformation} />
+      <SaleInformation sale={saleInformation} saleId={sale.id} />
       <FooterSale saleId={sale.id} />
     </div>
   )
