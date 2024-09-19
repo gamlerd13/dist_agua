@@ -8,6 +8,8 @@ export const formSchema = z.object({
   fechaCumple: z.date(),
   modeloNegocio: z.string().nonempty('El modelo de negocio es requerido'),
   rutaId: z.number().int(),
-  pedidoConcurrencia: z.number().int(),
+  pedidoConcurrencia: z
+  .string()
+  .transform((val) => Number(val)),
   isActive: z.boolean(),
 });

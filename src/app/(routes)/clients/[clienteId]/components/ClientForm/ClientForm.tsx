@@ -21,6 +21,7 @@ import { useClientForm } from "./Hooks/useClientForm"
 import { ClientEdit } from "@/interfaces/client"
 import { Checkbox } from "@/components/ui/checkbox"
 import { CustomCalendar } from "@/components/Calendario/CustomCalendar"
+import { Separator } from "@/components/ui/separator"
 
 export function ClientForm({ client }: { client: ClientEdit }) {
   const { form, onSubmit, locations } = useClientForm(client)
@@ -69,10 +70,6 @@ export function ClientForm({ client }: { client: ClientEdit }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Fecha de Cumpleaños</FormLabel>
-                {/* <CalendarioScrollable
-                  selected={field.value ? new Date(field.value) : undefined}
-                  onSelect={field.onChange}
-                /> */}
                 <CustomCalendar
                   selected={field.value ? new Date(field.value) : undefined}
                   onSelect={field.onChange}
@@ -164,22 +161,43 @@ export function ClientForm({ client }: { client: ClientEdit }) {
           />
           <FormField
             control={form.control}
-            name="isActive"
+            name="pedidoConcurrencia"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+              <FormItem>
+                <FormLabel>Concurrencia de Pedido</FormLabel>
                 <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
+                  <Input
+                    placeholder="Pedido de concurrencia..."
+                    type="number"
+                    {...field}
                   />
                 </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>Activo</FormLabel>
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
         </div>
+        <Separator />
+        <FormField
+          control={form.control}
+          name="isActive"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>¿Activo?</FormLabel>
+                <p className="text-sm text-muted-foreground">
+                  Marque esta casilla si el cliente está activo
+                </p>
+              </div>
+            </FormItem>
+          )}
+        />
         <Button type="submit">Actualizar cliente</Button>
       </form>
     </Form>
