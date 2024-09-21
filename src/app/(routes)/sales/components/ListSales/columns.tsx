@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react"
+import { MoreHorizontal, Pencil } from "lucide-react"
 
 import { ColumnDef } from "@tanstack/react-table"
 

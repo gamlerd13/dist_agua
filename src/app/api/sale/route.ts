@@ -43,10 +43,12 @@ export async function GET() {
             status: sale.status,
             paymentMethod: sale.paymentMethod,
             notes: sale.notes,
+            clientId: sale.clientId,
             clientSurnames: sale.client.apellidos,
             clientNames: sale.client.nombres,
             route: sale.client.ruta.name,
             district: sale.client.ruta.distrito.name,
+            businessModel: sale.client.modeloNegocio,
           }))
 
         return NextResponse.json(saleClient, { status: 200 });

@@ -18,8 +18,10 @@ export interface SaleClient{
   status: string,
   paymentMethod: string,
   notes: string,
+  clientId: number,
   clientSurnames: string,
   clientNames: string,
   route: string,
   district: string,
+  businessModel: string,
 }
