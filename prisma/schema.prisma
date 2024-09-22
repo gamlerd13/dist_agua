@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  typeUser  UserType
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Distrito {
+  id    Int     @id @default(autoincrement())
+  name  String
+  rutas Rutas[]
+}
+
+model Rutas {
+  id         Int       @id @default(autoincrement())
+  name       String
+  distritoId Int
+  distrito   Distrito  @relation(fields: [distritoId], references: [id])
+  Cliente    Cliente[]
+}
+
+model Product {
+  id           Int          @id @default(autoincrement())
+  name         String
+  litros       String
+  isReturnable Boolean
+  botlePrice   Decimal
+  contentPrice Decimal
+  saleDetail   SaleDetail[]
+}
+
+enum UserType {
+  admin
+  carrier
+  assistant
+}
+
+model Cliente {
+  id                 Int       @id @default(autoincrement())
+  nombres            String
+  apellidos          String
+  fechaCumple        DateTime
+  telefono           String
+  direccion          String
+  modeloNegocio      String
+  coordenadaX        Decimal
+  coordenadaY        Decimal
+  rutaId             Int
+  ruta               Rutas     @relation(fields: [rutaId], references: [id])
+  visitas            Visita[]
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  lastVerification   DateTime?
+  pedidoConcurrencia Int       @default(0)
+  sale               Sale[]
+}
+
+model Visita {
+  id            Int      @id @default(autoincrement())
+  fechaVisita   DateTime
+  clienteId     Int
+  cliente       Cliente  @relation(fields: [clienteId], references: [id])
+  observaciones String?
+  createdAt     DateTime @default(now())
+}
+
+model TypeOfExpense {
+  id               Int     @id @default(autoincrement())
+  description      String
+  hasUnitOfMeasure Boolean
+  unitOfMeasure    String?
+
+  expense Expense[]
+}
+
+model Expense {
+  id              Int      @id @default(autoincrement())
+  description     String
+  date            DateTime @default(now())
+  typeOfExpenseId Int
+  amount          Decimal
+  price           Decimal
+  total           Decimal
+  observation     String
+
+  typeOfExpense TypeOfExpense @relation(fields: [typeOfExpenseId], references: [id])
+}
+
+model Sale {
+  id            Int           @id @default(autoincrement())
+  clientId      Int
+  client        Cliente       @relation(fields: [clientId], references: [id])
+  saleDate      DateTime      @default(now())
+  totalRevenue  Decimal
+  status        SaleStatus
+  paymentMethod PaymentMethod
+  notes         String
+  saleDetail    SaleDetail[]
+}
+
+model SaleDetail {
+  id          Int     @id @default(autoincrement())
+  saleId      Int
+  sale        Sale    @relation(fields: [saleId], references: [id])
+  productId   Int
+  product     Product @relation(fields: [productId], references: [id])
+  bottlePrice Decimal
+  quantity    Int
+  revenue     Decimal
+}
+
+enum SaleStatus {
+  completed
+  pending
+}
+
+enum PaymentMethod {
+  undefined
+  cash
+  yape
+  izipay
+  plin
+  credit
+}
