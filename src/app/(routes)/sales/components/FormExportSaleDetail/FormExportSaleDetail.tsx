@@ -92,7 +92,7 @@ export function FormExportSaleDetail(props: FormExportSaleDetailProps) {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="clientId"
               render={({ field }) => (
@@ -146,7 +146,7 @@ export function FormExportSaleDetail(props: FormExportSaleDetailProps) {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </div>
           <Button type="submit" disabled={!isValid}>
             Filtrar ventas
