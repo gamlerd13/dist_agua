@@ -38,8 +38,9 @@ export async function GET() {
             observation: expense.observation,
             typeOfExpense: expense.typeOfExpense.description,
             unitOfMeasure: expense.typeOfExpense.unitOfMeasure,
+            typeOfExpenseId: expense.typeOfExpenseId
           }))
-
+          
         return NextResponse.json(expenseTypeExpense, { status: 200 });
     } catch (error) {
         console.log("[EXPENSE]", error);

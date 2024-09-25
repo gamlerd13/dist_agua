@@ -70,6 +70,10 @@ export function ClientForm({ client }: { client: ClientEdit }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Fecha de Cumpleaños</FormLabel>
+                {/* <CalendarioScrollable
+                  selected={field.value ? new Date(field.value) : undefined}
+                  onSelect={field.onChange}
+                /> */}
                 <CustomCalendar
                   selected={field.value ? new Date(field.value) : undefined}
                   onSelect={field.onChange}
@@ -167,37 +171,39 @@ export function ClientForm({ client }: { client: ClientEdit }) {
                 <FormLabel>Concurrencia de Pedido</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Pedido de concurrencia..."
                     type="number"
+                    placeholder="0"
                     {...field}
+                    onChange={(e) => field.onChange(parseInt(e.target.value))}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
-        <Separator />
-        <FormField
-          control={form.control}
-          name="isActive"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
+            </div>
+            <Separator />
+          <FormField
+            control={form.control}
+            name="isActive"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
                 <FormLabel>¿Activo?</FormLabel>
                 <p className="text-sm text-muted-foreground">
                   Marque esta casilla si el cliente está activo
                 </p>
-              </div>
-            </FormItem>
-          )}
-        />
+                </div>
+              </FormItem>
+            )}
+          />
+
         <Button type="submit">Actualizar cliente</Button>
       </form>
     </Form>

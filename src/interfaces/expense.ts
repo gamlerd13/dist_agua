@@ -28,6 +28,7 @@ export interface ExpenseTypeExpense{
   description: string,
   date: Date,
   typeOfExpense: string,
+  typeOfExpenseId: number,
   amount: number,
   price: number,
   total: string,

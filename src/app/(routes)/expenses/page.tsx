@@ -8,10 +8,9 @@ import useTypeExpense from "./Hooks/useTypeExpense"
 export default function ExpensesPage() {
   const { expense, createExpense } = useExpense()
   const { typeExpense } = useTypeExpense()
-
   return (
     <div>
-      <HeaderExpenses createExpense={createExpense} typeExpense={typeExpense} />
+      <HeaderExpenses createExpense={createExpense} typeExpense={typeExpense} expenses={expense} />
       <ListExpenses expense={expense} />
     </div>
   )
