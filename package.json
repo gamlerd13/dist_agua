@@ -9,8 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed-user": "node prisma/seed.mjs",
-    "seed-client": "node prisma/seed.mjs",
-    "seed-product": "node prisma/seed.mjs"
+    "seed-client": "node prisma/seed.client.mjs",
+    "seed-product": "node prisma/seed.product.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
