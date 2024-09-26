@@ -64,7 +64,7 @@ export function SidebarRoutes() {
           ))}
         </div>
         <Separator />
-        <div className="p-2 md:p-6">
+        {/* <div className="p-2 md:p-6">
           <p className="text-slate-500 mb-2">TOOLS</p>
 
           {dataToolsSidebar.map((item) => (
@@ -77,14 +77,14 @@ export function SidebarRoutes() {
           {dataSupportSidebar.map((item) => (
             <SidebarItem key={item.label} item={item} />
           ))}
-        </div>
+        </div> */}
       </ScrollArea>
       <div className="p-4 md:p-6 border-t">
         <Button variant="outline" className="w-full" onClick={() => signOut()}>
           Salir <LogOut className="ms-4" width={16} />
         </Button>
         <footer className="mt-3 text-center text-sm text-gray-500">
-          2024. Todos los derechos reservados
+          Kedevs - 2024. Todos los derechos reservados
         </footer>
       </div>
     </div>
