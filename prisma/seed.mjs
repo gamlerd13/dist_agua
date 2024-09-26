@@ -99,7 +99,7 @@ async function main() {
 
   try {
 
-    const existData = await prisma.product.count()
+    const existData = await prisma.user.count()
     if(existData>0) return console.log("This is a firts time proccess, do not execute in a exist data")
 
     const usersHashPassword = await Promise.all(
