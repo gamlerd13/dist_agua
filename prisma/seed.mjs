@@ -94,27 +94,35 @@ const rutas = [
 ]
 
 async function main() {
-  // const listUsers = await Promise.all(
-  //   users.map(async (user) => ({
-  //     ...user,
-  //     password: await bcrypt.hash(user.password, 10)
-  //   }))
-  // )
+  console.log("Creating data ...")
 
-  await prisma.user.createMany({
-    data: users,
-    skipDuplicates: true,
-  })
+  try {
+    const usersHashPassword = await Promise.all(
+      users.map(async (user) => ({
+        ...user,
+        password: await bcrypt.hash(user.password, 10)
+      }))
+    )
+    const userCreated = await prisma.user.createMany({
+      data: usersHashPassword,
+      skipDuplicates: true,
+    })
+    const distritosCreated = await prisma.distrito.createMany({
+      data: districts,
+      skipDuplicates: true,
+    })
+    const rutasCreated =await prisma.rutas.createMany({
+      data: rutas,
+      skipDuplicates: true,
+    })
 
-  await prisma.distrito.createMany({
-    data: districts,
-    skipDuplicates: true,
-  })
+  console.log({userCreated}, {distritosCreated} ,{rutasCreated})
 
-  await prisma.rutas.createMany({
-    data: rutas,
-    skipDuplicates: true,
-  })
+  } catch (error) {
+  console.log("Hubo un error,", error)
+  }
+
+
 }
 
 main()
