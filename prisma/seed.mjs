@@ -97,6 +97,10 @@ async function main() {
   console.log("Creating data ...")
 
   try {
+
+    const existData = await prisma.product.count()
+    if(existData>0) return console.log("This is a firts time proccess, do not execute in a exist data")
+
     const usersHashPassword = await Promise.all(
       users.map(async (user) => ({
         ...user,

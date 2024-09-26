@@ -46,6 +46,10 @@ async function main() {
   console.log("Creating productos ...")
 
   try {
+
+    const existProduct = await prisma.product.count()
+    if(existProduct>0) return console.log("This is a firts time proccess, do not execute in a exist data")
+
     const productsCreated = await prisma.product.createMany({
       data: products,
       skipDuplicates: true,

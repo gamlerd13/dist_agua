@@ -165,6 +165,9 @@ async function main() {
   console.log("Creating clientes ...")
 
   try {
+    const existClient = await prisma.cliente.count()
+    if(existClient>0) return console.log("This is a firts time proccess, do not execute in a exist data")
+
     const clientsCreated = await prisma.cliente.createMany({
       data: clientes,
       skipDuplicates: true,
