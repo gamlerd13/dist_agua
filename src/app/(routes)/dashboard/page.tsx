@@ -1,5 +1,4 @@
 "use client"
-import { Options } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth/next'
 
 function DashboardPage() {

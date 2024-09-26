@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcrypt"
 import db from "@/lib/db"
 
 
-export async function POST(request: { json: () => any }) {
+export async function POST(request: NextRequest) {
     try {
         const data = await request.json()
         const userFound = await db.user.findUnique({

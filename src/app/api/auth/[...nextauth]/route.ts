@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from '@/lib/db'
 import bcrypt from 'bcrypt'
 
-export const Options = {
+ const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
@@ -35,11 +36,15 @@ export const Options = {
             },
         }),
     ],
+    session: {
+        strategy: "jwt",
+      },
     pages: {
         signIn: "/auth/login",
-    }
+    },
+    debug: process.env.NODE_ENV === "development",
 };
 
-const handler = NextAuth(Options)
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
