@@ -9,10 +9,8 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // Inicia el cron job automáticamente
   scheduleJobs();
 
-  // Especificar los tipos de req y res
   server.all('*', (req: express.Request, res: express.Response) => {
     return handle(req, res);
   });

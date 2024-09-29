@@ -15,15 +15,21 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useTypeExpenseForm } from "./Hooks/useTypeExpenseForm"
 import { TypeExpense } from "@/interfaces/typeExpense"
 import { useEffect } from "react"
+import { useWatch } from "react-hook-form"
 
 export function TypeExpenseForm({ typeExpense }: { typeExpense: TypeExpense }) {
   const { form, onSubmit } = useTypeExpenseForm(typeExpense)
 
+  const hasUnitOfMeasure = useWatch({
+    control: form.control,
+    name: "hasUnitOfMeasure",
+  });
+
   useEffect(() => {
-    if (!form.watch("hasUnitOfMeasure")) {
-      form.setValue("unitOfMeasure", "")
+    if (!hasUnitOfMeasure) {
+      form.setValue("unitOfMeasure", "");
     }
-  }, [form.watch("hasUnitOfMeasure")])
+  }, [hasUnitOfMeasure, form]);
 
   return (
     <Form {...form}>

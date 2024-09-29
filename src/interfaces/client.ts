@@ -1,13 +1,13 @@
 interface ClientBase {
-  nombres: string
-  apellidos: string
-  fechaCumple: Date | undefined
-  telefono: string
-  direccion: string
-  modeloNegocio: string
-  isActive: boolean
-  pedidoConcurrencia: number
-  rutaId: number
+  nombres?: string
+  apellidos?: string
+  fechaCumple?: Date | undefined
+  telefono?: string
+  direccion?: string
+  modeloNegocio?: string
+  isActive?: boolean
+  pedidoConcurrencia?: number
+  rutaId?: number
 }
 
 export interface Client extends ClientBase {
@@ -25,7 +25,7 @@ export interface ClientEdit extends ClientBase {
   updatedAt: Date
 }
 
-export interface ClientMain{
+export interface ClientMain {
   id?: number,
   nombres: string,
   apellidos: string,

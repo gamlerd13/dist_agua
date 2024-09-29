@@ -44,11 +44,11 @@ export const dataToolsSidebar = [
         label: "Sobre nosotros",
         href: "/about"
     },
-    {
-        icon: BarChart4,
-        label: "Reportes",
-        href: "/reportes"
-    },
+    // {
+    //     icon: BarChart4,
+    //     label: "Reportes",
+    //     href: "/reportes"
+    // },
 ]
 
 export const dataSupportSidebar = [
@@ -63,7 +63,7 @@ export const dataSidebarExpenses = [
     {
         title: "Gastos",
         icon: CircleDollarSign,
-        children : [
+        children: [
             {
                 label: "Tipo de gasto",
                 href: "/typeExpense",

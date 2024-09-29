@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 
 
 export default function useClient() {
-    const [client, setClient] = useState<GetClient[]|null>(null);
+    const [client, setClient] = useState<GetClient[] | null>(null);
     const getClient = async () => {
         try {
-            const {data, status} = await axios.get("/api/client")
-            if (status==200) {
+            const { data, status } = await axios.get("/api/client")
+            if (status == 200) {
                 setClient(data)
             }
         } catch (error) {
@@ -23,6 +23,6 @@ export default function useClient() {
 
     useEffect(() => {
         getClient()
-    },[])
-    return {client, getClient}
+    }, [])
+    return { client, getClient }
 }

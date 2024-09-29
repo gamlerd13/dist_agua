@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { FormCreateExpenseProps } from "./FormCreateExpense.types"
 import { useState, useEffect } from "react"
+import { useWatch } from "react-hook-form";
 
 const formSchema = z.object({
   description: z.string(),
@@ -59,6 +60,21 @@ export function FormCreateExpense(props: FormCreateExpenseProps) {
 
   const { isValid } = form.formState
 
+  const amount = useWatch({
+    control: form.control,
+    name: "amount",
+  });
+
+  const price = useWatch({
+    control: form.control,
+    name: "price",
+  });
+
+  useEffect(() => {
+    const total = amount * price;
+    form.setValue("total", total.toString());
+  }, [amount, price, form]);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     createExpense(values)
     setOpenModalCreate(false)
@@ -74,13 +90,6 @@ export function FormCreateExpense(props: FormCreateExpenseProps) {
       form.setValue("description", selectedType.description)
     }
   }
-
-  useEffect(() => {
-    const amount = form.watch("amount")
-    const price = form.watch("price")
-    const total = amount * price
-    form.setValue("total", total.toString())
-  }, [form.watch("amount"), form.watch("price")])
 
   return (
     <div>
