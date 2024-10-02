@@ -5,9 +5,11 @@ export function Sidebar() {
   return (
     <div className="h-screen flex flex-col border-r">
       <Logo />
-      <div className="flex-grow overflow-hidden">
+
+      <div className="flex flex-col h-full">
         <SidebarRoutes />
       </div>
     </div>
+
   )
 }

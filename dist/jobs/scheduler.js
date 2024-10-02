@@ -11,7 +11,7 @@ const resend = new resend_1.Resend(process.env.RESEND_API_KEY);
 function scheduler() {
     // * * * * * -> pruebas: para ejecutar cada minuto
     // 0 0 25 * * ->  // se ejecutará cada 25 a las 00:00
-    node_cron_1.default.schedule('* * * * *', async () => {
+    node_cron_1.default.schedule('0 0 25 * *', async () => {
         console.log("scheduler ejecutado");
         const clientesFaltantes = [];
         const clientes = await db_1.default.cliente.findMany({
