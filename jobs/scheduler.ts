@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export function scheduler() {
   // * * * * * -> pruebas: para ejecutar cada minuto
   // 0 0 25 * * ->  // se ejecutará cada 25 a las 00:00
-  cron.schedule('* * * * *', async () => {
+  cron.schedule('0 0 25 * *', async () => {
     console.log("scheduler ejecutado")
     const clientesFaltantes: Cliente[] = [];
 
