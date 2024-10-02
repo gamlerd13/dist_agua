@@ -85,7 +85,7 @@ export function FormExportExpense({ setOpenModalExportExpense, expenses, typeExp
               </FormItem>
             )}
           />
-          < FormField
+          {/*< FormField
             control={form.control}
             name="expenseType"
             render={({ field }) => (
@@ -101,7 +101,6 @@ export function FormExportExpense({ setOpenModalExportExpense, expenses, typeExp
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {/* Opción para todos los tipos de gasto */}
                     <SelectItem value="all" > Todos los tipos de gasto </SelectItem>
                     {
                       typeExpense?.map((typeExpense) => (
@@ -118,7 +117,7 @@ export function FormExportExpense({ setOpenModalExportExpense, expenses, typeExp
                 < FormMessage />
               </FormItem>
             )}
-          />
+          />*/}
         </div>
         < Button type="submit" disabled={!isValid}>
           Exportar gastos

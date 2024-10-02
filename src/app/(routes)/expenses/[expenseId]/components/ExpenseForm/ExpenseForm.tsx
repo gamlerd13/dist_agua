@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Expense } from "@/interfaces/expense"
 import { useExpenseForm } from "./Hooks/useExpenseForm"
+import { useWatch } from "react-hook-form"
 
 export function ExpenseForm({ expense }: { expense: Expense }) {
   const expenseWithDateAndDecimal = {
@@ -33,13 +34,20 @@ export function ExpenseForm({ expense }: { expense: Expense }) {
   const { form, onSubmit, typeExpenses } = useExpenseForm(
     expenseWithDateAndDecimal
   )
+  const amount = useWatch({
+    control: form.control,
+    name: "amount",
+  });
+
+  const price = useWatch({
+    control: form.control,
+    name: "price",
+  });
 
   useEffect(() => {
-    const amount = parseFloat(form.watch("amount")) || 0
-    const price = parseFloat(form.watch("price")) || 0
-    const total = amount * price
-    form.setValue("total", total.toString())
-  }, [form.watch("amount"), form.watch("price")])
+    const total = parseFloat(amount) * parseFloat(price);
+    form.setValue("total", total.toString());
+  }, [amount, price, form]);
 
   return (
     <Form {...form}>

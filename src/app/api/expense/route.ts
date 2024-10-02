@@ -22,9 +22,9 @@ export async function GET() {
     try {
         const expense = await db.expense.findMany({
             include: {
-              typeOfExpense: true
+                typeOfExpense: true
             }
-          });
+        });
 
         if (!expense) throw new Error("error");
 
@@ -39,8 +39,8 @@ export async function GET() {
             typeOfExpense: expense.typeOfExpense.description,
             unitOfMeasure: expense.typeOfExpense.unitOfMeasure,
             typeOfExpenseId: expense.typeOfExpenseId
-          }))
-          
+        }))
+
         return NextResponse.json(expenseTypeExpense, { status: 200 });
     } catch (error) {
         console.log("[EXPENSE]", error);

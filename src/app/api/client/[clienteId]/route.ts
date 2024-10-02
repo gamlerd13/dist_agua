@@ -31,7 +31,6 @@ export async function DELETE(req: Request, { params }: { params: { clienteId: st
     console.log("delete: ", params.clienteId)
     const clienteId = parseInt(params.clienteId);
 
-    // No se actualiza el cliente sino que se elimina, por lo que usaremos delete en lugar de update
     const deletedCliente = await db.cliente.delete({
       where: { id: clienteId },
     });

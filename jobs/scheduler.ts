@@ -5,10 +5,10 @@ import cron from 'node-cron';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export function scheduler() {
-  // * * * * * -> pruebas: para ejecutar cada minuto 
-  cron.schedule('0 0 25 * *', async () => { // se ejecutará cada 25 a las 00:00
+  // * * * * * -> pruebas: para ejecutar cada minuto
+  // 0 0 25 * * ->  // se ejecutará cada 25 a las 00:00
+  cron.schedule('* * * * *', async () => {
     console.log("scheduler ejecutado")
-    // Especificar el tipo del array 'clientesFaltantes'
     const clientesFaltantes: Cliente[] = [];
 
     const clientes = await db.cliente.findMany({
@@ -98,6 +98,3 @@ function generateEmailBody(clientesFaltantes: Cliente[]) {
     </table>
   `;
 }
-
-// Exportar la función scheduler usando module.exports
-// module.exports = { scheduler };

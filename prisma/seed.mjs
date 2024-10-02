@@ -100,7 +100,7 @@ async function main() {
   try {
 
     const existData = await prisma.user.count()
-    if(existData>0) return console.log("This is a firts time proccess, do not execute in a exist data")
+    if (existData > 0) return console.log("This is a firts time proccess, do not execute in a exist data")
 
     const usersHashPassword = await Promise.all(
       users.map(async (user) => ({
@@ -116,15 +116,15 @@ async function main() {
       data: districts,
       skipDuplicates: true,
     })
-    const rutasCreated =await prisma.rutas.createMany({
+    const rutasCreated = await prisma.rutas.createMany({
       data: rutas,
       skipDuplicates: true,
     })
 
-  console.log({userCreated}, {distritosCreated} ,{rutasCreated})
+    console.log({ userCreated }, { distritosCreated }, { rutasCreated })
 
   } catch (error) {
-  console.log("Hubo un error,", error)
+    console.log("Hubo un error,", error)
   }
 
 

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { useClientForm } from "./Hooks/useClientForm"
 import { ClientEdit } from "@/interfaces/client"
 import MapWithNoSSR from "./components/MapNoSSR"
+import { useWatch } from "react-hook-form"
 
 export function ClientMap({ client }: { client: ClientEdit }) {
   const { form, onSubmit } = useClientForm(client)
@@ -25,12 +26,21 @@ export function ClientMap({ client }: { client: ClientEdit }) {
   )
   const [address, setAddress] = useState<string>("")
 
+  const coordenadaX = useWatch({
+    control: form.control,
+    name: "coordenadaX",
+  });
+  const coordenadaY = useWatch({
+    control: form.control,
+    name: "coordenadaY",
+  });
+
   useEffect(() => {
-    const coordenadaX = parseFloat(form.getValues("coordenadaX"))
-    const coordenadaY = parseFloat(form.getValues("coordenadaY"))
-    if (!isNaN(coordenadaX)) setLng(coordenadaX)
-    if (!isNaN(coordenadaY)) setLat(coordenadaY)
-  }, [form.watch("coordenadaX"), form.watch("coordenadaY")])
+    const parsedX = parseFloat(coordenadaX);
+    const parsedY = parseFloat(coordenadaY);
+    if (!isNaN(parsedX)) setLng(parsedX);
+    if (!isNaN(parsedY)) setLat(parsedY);
+  }, [coordenadaX, coordenadaY, form]);
 
   const handleMapClick = (newLat: number, newLng: number) => {
     setLat(newLat)

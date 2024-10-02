@@ -1,4 +1,4 @@
-export interface ExpenseMain{
+export interface ExpenseMain {
   id?: number,
   description: string,
   date: Date,
@@ -12,7 +12,7 @@ export interface ExpenseMain{
 export type ExpensePost = Omit<ExpenseMain, 'id' | 'date'>
 export type Expense = Required<ExpenseMain>
 
-export interface ExpenseEdit{
+export interface ExpenseEdit {
   id: number,
   description: string,
   date: Date,
@@ -23,7 +23,7 @@ export interface ExpenseEdit{
   observation: string,
 }
 
-export interface ExpenseTypeExpense{
+export interface ExpenseTypeExpense {
   id: number,
   description: string,
   date: Date,

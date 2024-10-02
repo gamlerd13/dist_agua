@@ -1,21 +1,17 @@
-import NextAuth from "next-auth"
-import { NextAuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import db from "@/lib/db"
-import bcrypt from "bcrypt"
+import NextAuth, { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import db from '@/lib/db'
+import bcrypt from 'bcrypt'
 
-const authOptions: NextAuthOptions = {
+const Options: AuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
         username: { label: "Username", type: "text", placeholder: "juanperez" },
-        password: { label: "Password", type: "password" },
+        password: { label: "Password", type: "password" }
       },
-      async authorize(
-        credentials: Record<"username" | "password", string> | undefined,
-        req
-      ): Promise<any> {
+      async authorize(credentials: Record<"username" | "password", string> | undefined, req): Promise<any> {
         console.log(credentials)
 
         const userFound = await db.user.findUnique({
